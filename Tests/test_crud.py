@@ -1,4 +1,4 @@
-from Domain.carte import create_book, get_id
+from Domain.carte2 import create_book, get_id
 from Logic.crud import create, read, update, delete
 
 
@@ -39,7 +39,7 @@ def test_update():
 
 def test_delete():
     carti = get_data()
-    de_sters = 4
+    de_sters = 3
     carte_de_sters = read(carti, de_sters)
     stearsa = delete(carti, de_sters)
     assert carte_de_sters not in stearsa

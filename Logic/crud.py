@@ -1,4 +1,4 @@
-from Domain.carte import create_book, get_id, get_titlu, get_gen, get_pret, get_tip_reducere
+from Domain.carte2 import create_book, get_id, get_titlu, get_gen, get_pret, get_tip_reducere
 
 
 def create(lista_carti, id_carte, titlu, gen, pret, tip_reducere_client):

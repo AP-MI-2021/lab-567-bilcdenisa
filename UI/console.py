@@ -25,12 +25,7 @@ def handle_crud(carti):
         if optiune == '1':
             handle_add(carti)
         elif optiune == 'a':
-
             handle_show_all(carti)
-
-        elif optiune == '2':
-            handle_update(carti)
-
         elif optiune == 'b':
             break
         else:
