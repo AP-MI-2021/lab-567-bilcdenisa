@@ -3,7 +3,7 @@ from Domain.carte2 import create_book, get_id, get_titlu, get_gen, get_pret, get
 
 def create(lista_carti, id_carte, titlu, gen, pret, tip_reducere_client):
     '''
-
+    Adauga la lista de carti o carte noua.
     :param lista_carti: lista de carti
     :param id_carte: id-ul cartii
     :param titlu: titlul cartii
