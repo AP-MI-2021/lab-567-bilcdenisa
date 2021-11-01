@@ -1,4 +1,4 @@
-from Domain.carte2 import create_book, get_id, get_titlu, get_gen, get_pret, get_tip_reducere
+from Domain.carte import create_book, get_id, get_titlu, get_gen, get_pret, get_tip_reducere
 
 
 def create(lista_carti, id_carte, titlu, gen, pret, tip_reducere_client):
@@ -31,7 +31,7 @@ def read(lista_carti, id_carte):
     if carte_id:
         return carte_id
     else:
-        return lista_carti
+        return None
 
 
 def delete(lista_carti, id_carte):

@@ -1,4 +1,4 @@
-from Domain.carte2 import create_book, get_id
+from Domain.carte import create_book, get_id
 from Logic.crud import create, read, update, delete
 
 
@@ -27,7 +27,7 @@ def test_read():
     carti = get_data()
     carte = carti[1]
     assert read(carti, get_id(carte)) == carte
-    assert read(carti, None) == carti
+    assert read(carti, None) == None
 
 def test_update():
     carti = get_data()
@@ -47,6 +47,10 @@ def test_delete():
     assert len(stearsa) == len(carti)-1
 
 
-
+def test_crud():
+    test_delete()
+    test_update()
+    test_read()
+    test_create()
 
 
