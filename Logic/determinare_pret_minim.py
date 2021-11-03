@@ -29,7 +29,7 @@ def determinare_pret_minim(lista_carti):
             if get_gen(carte) == gen and get_pret(carte)<pret_minim:
                 pret_minim = get_pret(carte)
 
-        lista_preturi_minime.append((gen,pret_minim))
+        lista_preturi_minime.append((gen, pret_minim))
 
     return lista_preturi_minime
 

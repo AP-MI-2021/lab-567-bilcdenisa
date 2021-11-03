@@ -1,4 +1,4 @@
-def create_book(id_carte: int, titlu, gen, pret, tip_reducere_client):
+def create_book(id_carte, titlu, gen, pret, tip_reducere_client):
     '''
     Creeaza o carte.
     :param id_carte: id-ul cartii, trebuie sa fie unic
@@ -25,6 +25,7 @@ def get_id(carte):
     '''
     return carte['id']
 
+
 def get_titlu(carte):
     '''
     Getter pentru titlul cartii.
@@ -33,6 +34,7 @@ def get_titlu(carte):
     '''
 
     return carte['titlu']
+
 
 def get_gen(carte):
     '''
@@ -43,6 +45,7 @@ def get_gen(carte):
 
     return carte['gen']
 
+
 def get_pret(carte):
     '''
     Getter pentru pretul cartii.
@@ -51,6 +54,7 @@ def get_pret(carte):
     '''
 
     return carte['pret']
+
 
 def get_tip_reducere(carte):
     '''
@@ -61,6 +65,7 @@ def get_tip_reducere(carte):
 
     return carte['tip reducere']
 
+
 def get_str_carte(carte):
     '''
     Getter pentru reprezentarea de tip string a unei carti.
@@ -68,4 +73,4 @@ def get_str_carte(carte):
     :return: reprezentarea de tip string a cartii
     '''
 
-    return f'Cartea cu id-ul {get_id(carte)}, cu titlul {get_titlu(carte)}, din genul {get_gen(carte)}, cu pretul {get_pret(carte)} si tipul de reducere client{get_tip_reducere(carte)}.'
+    return f'Cartea cu id-ul {get_id(carte)}, cu titlul {get_titlu(carte)}, din genul {get_gen(carte)}, cu pretul {get_pret(carte)} si tipul de reducere client {get_tip_reducere(carte)}.'

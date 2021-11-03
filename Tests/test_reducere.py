@@ -19,3 +19,10 @@ def test_reducere():
     assert get_pret(lista_cu_reducere[4]) == 90
     assert get_pret(lista_cu_reducere[5]) == 57
     assert get_pret(lista_cu_reducere[0]) == 35
+
+    carti2 = []
+    try:
+        discount(carti2)
+        assert False
+    except ValueError:
+        assert True

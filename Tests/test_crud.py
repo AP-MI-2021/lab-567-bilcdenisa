@@ -23,11 +23,19 @@ def test_create():
 
     assert ok
 
+    parametrii2 = (1, 'titlu1', 'gen1', 35, 'none')
+    try:
+        create(carti_noi, *parametrii2)
+        assert False
+    except ValueError:
+        assert True
+
 def test_read():
     carti = get_data()
     carte = carti[1]
     assert read(carti, get_id(carte)) == carte
-    assert read(carti, None) == None
+    assert read(carti, 100) == None
+
 
 def test_update():
     carti = get_data()
@@ -37,6 +45,14 @@ def test_update():
     assert carte_updated not in carti
     assert len(carti_updated) == len(carti)
 
+    carte_updated_2 = create_book(100, 'titlu nou2', 'gen nou2', 100, 'none')
+    try:
+        update(carti, carte_updated_2)
+        assert False
+    except ValueError:
+        assert True
+
+
 def test_delete():
     carti = get_data()
     de_sters = 3
@@ -45,6 +61,13 @@ def test_delete():
     assert carte_de_sters not in stearsa
     assert carte_de_sters in carti
     assert len(stearsa) == len(carti)-1
+
+    de_sters_2 = 100
+    try:
+        delete(carti, de_sters_2)
+        assert False
+    except ValueError:
+        assert True
 
 
 def test_crud():

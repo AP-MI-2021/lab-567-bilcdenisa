@@ -22,3 +22,11 @@ def test_modificare_gen():
     assert get_gen(lista_carti[2]) != get_gen(lista_noua[2])
     assert get_titlu(lista_carti[2]) == get_titlu(lista_noua[2])
     assert get_gen(lista_noua[2]) == 'gen1'
+    id2 = 7
+    titlu2 = 'titlu1'
+    gen2 = 'gen1'
+    try:
+        modificare_gen(lista_carti,id2,titlu2,gen2)
+        assert False
+    except ValueError:
+        assert True

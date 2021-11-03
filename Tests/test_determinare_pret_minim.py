@@ -19,4 +19,11 @@ def test_determinare_pret_minim():
     assert lista_preturi_minime[2][1] == 59.99
     assert len(lista_preturi_minime) == 4
 
+    lista_carti_2 = []
+    try:
+        determinare_pret_minim(lista_carti_2)
+        assert False
+    except ValueError:
+        assert True
+
 
