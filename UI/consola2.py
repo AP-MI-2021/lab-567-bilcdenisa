@@ -2,6 +2,8 @@ from Domain.carte import get_str_carte, get_titlu, get_gen, get_pret, get_tip_re
 from Logic.crud import create, delete, update, read
 from Logic.determinare_pret_minim import determinare_pret_minim
 from Logic.modificare_gen import modificare_gen
+from Logic.reducere import discount
+
 
 def show_menu2():
     print(' Comenzi: ')
@@ -12,6 +14,7 @@ def show_menu2():
     print(' details ')
     print(' pret minim ')
     print(' modificare gen ')
+    print(' discount ')
     print(' quit ')
 
 def handle_details(lista_carti, comanda):
@@ -102,8 +105,16 @@ def handle_help():
     print('details,4;')
     print('pret minim;')
     print('modificare gen,4,titlu4,gen15;')
+    print('discount')
     print('quit;')
 
+
+def handle_discount2(lista_carti):
+    lista_noua = discount(lista_carti)
+    print('Lista actualizata in urma aplicarii reducerii este: ')
+
+    for carte in lista_noua:
+        print(get_str_carte(carte))
 
 
 def run_ui2(lista_carti):
@@ -131,6 +142,8 @@ def run_ui2(lista_carti):
                 handle_modificare_gen2(lista_carti, comanda)
             elif comanda[0] == 'help':
                 handle_help()
+            elif comanda[0]=='discount':
+                handle_discount2(lista_carti)
             elif comanda[0] == 'quit':
                 ok = False
         if ok == False:
