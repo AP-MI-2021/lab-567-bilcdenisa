@@ -9,7 +9,8 @@ def undo(lista_versiuni, versiune_curenta):
     if versiune_curenta == 0 and lista_versiuni[0] == []:
         return [], 0
     elif versiune_curenta == 0 and lista_versiuni[0] != []:
-        return lista_versiuni[0]
+        return lista_versiuni[0], versiune_curenta
+
     versiune_curenta = versiune_curenta - 1
     return lista_versiuni[versiune_curenta], versiune_curenta
 
