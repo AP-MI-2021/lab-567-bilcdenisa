@@ -22,7 +22,7 @@ def main():
    lista_carti = create(lista_carti, 6, 'titlu6', 'gen2', 145, 'gold')
    lista_carti = create(lista_carti, 7, 'titlu7', 'gen4', 20, 'none')
    lista = []
-   run_ui(lista)
+   run_ui(lista_carti)
 
 
 test_undo_redo()

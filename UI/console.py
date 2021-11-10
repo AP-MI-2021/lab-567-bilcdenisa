@@ -87,7 +87,7 @@ def handle_detalii(lista_carti):
         print('Eroare: ', ve)
 
 
-def handle_crud(lista_carti):
+def handle_crud(lista_carti, lista_versiuni, versiune_curenta):
 
     while True:
         print('1. Adaugare')
@@ -99,10 +99,13 @@ def handle_crud(lista_carti):
         optiune = input('Dati optiune ')
         if optiune == '1':
             lista_carti = handle_add(lista_carti)
+            lista_versiuni, versiune_curenta = handle_lista_noua(lista_versiuni, versiune_curenta, lista_carti)
         elif optiune == '2':
             lista_carti = handle_update(lista_carti)
+            lista_versiuni, versiune_curenta = handle_lista_noua(lista_versiuni, versiune_curenta, lista_carti)
         elif optiune == '3':
             lista_carti = handle_delete(lista_carti)
+            lista_versiuni, versiune_curenta = handle_lista_noua(lista_versiuni, versiune_curenta, lista_carti)
         elif optiune == '4':
             handle_detalii(lista_carti)
         elif optiune == 'a':
@@ -112,7 +115,7 @@ def handle_crud(lista_carti):
         else:
             print('Optiune invalida')
 
-    return lista_carti
+    return lista_carti, lista_versiuni, versiune_curenta
 
 
 def handle_discount(lista_carti):
@@ -199,8 +202,7 @@ def run_ui(lista_carti):
         show_menu()
         optiune = input('Dati optiune ')
         if optiune == '1':
-            lista_carti = handle_crud(lista_carti)
-            lista_versiuni, versiune_curenta = handle_lista_noua(lista_versiuni, versiune_curenta, lista_carti)
+            lista_carti, lista_versiuni, versiune_curenta = handle_crud(lista_carti, lista_versiuni, versiune_curenta)
         elif optiune == '2':
             lista_carti = handle_discount(lista_carti)
             lista_versiuni, versiune_curenta = handle_lista_noua(lista_versiuni, versiune_curenta, lista_carti)
