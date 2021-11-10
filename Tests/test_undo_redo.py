@@ -25,6 +25,9 @@ def test_undoRedo():
     assert lista[0] == {'id': 1, 'titlu': 'titlu1', 'gen': 'gen1', 'pret': 120, 'tip reducere': 'silver'}
     lista, versiune_curenta = undo(lista_versiuni, versiune_curenta)
     assert len(lista) == 0
+    lista, versiune_curenta = undo(lista_versiuni, versiune_curenta)
+    assert len(lista) == 0
+    assert lista == []
 
     lista_versiuni = [[]]
     versiune_curenta = 0
