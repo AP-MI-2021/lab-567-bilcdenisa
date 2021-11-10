@@ -8,16 +8,14 @@ from Logic.reducere import discount
 from Logic.undo import undo
 def test_undoRedo():
     lista = []
-    lista_versiuni = []
+    lista_versiuni = [lista]
     versiune_curenta = 0
-    lista_versiuni, versiune_curenta = lista_noua(lista_versiuni, versiune_curenta, lista)
     lista = create(lista, 1, 'titlu1', 'gen1', 120, 'silver')
     lista_versiuni, versiune_curenta = lista_noua(lista_versiuni, versiune_curenta, lista)
     lista = create(lista, 2, 'titlu2', 'gen2', 46, 'none')
     lista_versiuni, versiune_curenta = lista_noua(lista_versiuni, versiune_curenta, lista)
     lista = create(lista, 3, 'titlu3', 'gen3', 50, 'gold')
     lista_versiuni, versiune_curenta = lista_noua(lista_versiuni, versiune_curenta, lista)
-    versiune_curenta -=1
 
     lista, versiune_curenta = undo(lista_versiuni, versiune_curenta)
     assert len(lista) == 2
@@ -28,16 +26,14 @@ def test_undoRedo():
     lista, versiune_curenta = undo(lista_versiuni, versiune_curenta)
     assert len(lista) == 0
 
-    lista_versiuni = []
+    lista_versiuni = [[]]
     versiune_curenta = 0
-    lista_versiuni, versiune_curenta = lista_noua(lista_versiuni, versiune_curenta, lista)
     lista = create(lista, 1, 'titlu1', 'gen1', 120, 'silver')
     lista_versiuni, versiune_curenta = lista_noua(lista_versiuni, versiune_curenta, lista)
     lista = create(lista, 2, 'titlu2', 'gen2', 46, 'none')
     lista_versiuni, versiune_curenta = lista_noua(lista_versiuni, versiune_curenta, lista)
     lista = create(lista, 3, 'titlu3', 'gen3', 50, 'gold')
     lista_versiuni, versiune_curenta = lista_noua(lista_versiuni, versiune_curenta, lista)
-    versiune_curenta -= 1
 
 
     lista, versiune_curenta = redo(lista_versiuni, versiune_curenta)
