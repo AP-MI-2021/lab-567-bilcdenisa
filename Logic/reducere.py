@@ -3,7 +3,6 @@ from Domain.carte import get_tip_reducere, get_pret, create_book, get_titlu, get
 
 def discount(lista_carti):
 
-
     if len(lista_carti)== 0:
         raise ValueError('Lista de carti nu poate fi goala')
 

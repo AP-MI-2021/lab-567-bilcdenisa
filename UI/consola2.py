@@ -50,10 +50,10 @@ def handle_add2(lista_carti,comanda):
         comanda[1] = int(comanda[1])
         comanda[4] = int(comanda[4])
         carti = create(lista_carti, comanda[1], comanda[2], comanda[3], comanda[4], comanda[5])
-        print('lista in urma adaugarii este ')
+        print('Lista in urma adaugarii este ')
         handle_showall2(carti)
     except ValueError as ve:
-        print('eroare ', ve)
+        print('Eroare ', ve)
     return lista_carti
 
 def handle_delete2(lista_carti,comanda):
@@ -105,7 +105,7 @@ def handle_help():
     print('details,4;')
     print('pret minim;')
     print('modificare gen,4,titlu4,gen15;')
-    print('discount')
+    print('discount;')
     print('quit;')
 
 

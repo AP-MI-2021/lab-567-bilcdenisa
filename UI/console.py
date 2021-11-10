@@ -1,8 +1,13 @@
 from Domain.carte import get_str_carte, create_book, get_titlu, get_gen, get_pret, get_tip_reducere
+from Logic.afisare_titluri_distincte import titluri_distincte
 from Logic.crud import create, delete, update, read
 from Logic.determinare_pret_minim import determinare_pret_minim
+from Logic.lista_noua import lista_noua
 from Logic.modificare_gen import modificare_gen
+from Logic.ordonare import ordonare
+from Logic.redo import redo
 from Logic.reducere import discount
+from Logic.undo import undo
 
 
 def show_menu():
@@ -10,6 +15,10 @@ def show_menu():
     print('2. Aplicare discount de 5% pentru toate reducerile silver și 10% pentru toate reducerile gold')
     print('3. Modificarea genului pentru un titlu dat')
     print('4. Determinarea prețului minim pentru fiecare gen')
+    print('5. Ordonarea vânzărilor crescător după preț ')
+    print('6. Afișarea numărului de titluri distincte pentru fiecare gen ')
+    print('u. Undo')
+    print('r. Redo')
     print('x. Exit')
 
 
@@ -107,19 +116,30 @@ def handle_crud(lista_carti):
 
 
 def handle_discount(lista_carti):
-    lista_noua = discount(lista_carti)
-    print('Lista actualizata in urma aplicarii reducerii este: ')
 
-    for carte in lista_noua:
-        print(get_str_carte(carte))
+    try:
+        lista_carti = discount(lista_carti)
+        print('Lista actualizata in urma aplicarii reducerii este: ')
+
+        for carte in lista_carti:
+            print(get_str_carte(carte))
+    except ValueError as ve:
+        print('Eroare: ', ve)
+    return lista_carti
 
 
 def handle_pret_min(lista_carti):
 
-    lista_pret_min = determinare_pret_minim(lista_carti)
+    try:
+        lista_pret_min = determinare_pret_minim(lista_carti)
 
-    for pret in lista_pret_min:
-        print(f'Pretul minim pentru genul {pret[0]} este {pret[1]}')
+        for pret in lista_pret_min:
+            print(f'Pretul minim pentru genul {pret[0]} este {pret[1]}')
+        return lista_carti
+
+    except ValueError as ve:
+        print('Eroare: ', ve)
+
     return lista_carti
 
 
@@ -129,8 +149,8 @@ def handle_modificare_gen(lista_carti):
         id_carte = int(input('Dati id-ul cartii al carui gen doriti sa il modificati '))
         titlu = input('Dati titlul cartii ')
         gen = input('Dati genul cartii in care doriti sa il modificati ')
-        lista_noua = modificare_gen(lista_carti, id_carte, gen, titlu)
-        for carte in lista_noua:
+        lista_carti = modificare_gen(lista_carti, id_carte, gen, titlu)
+        for carte in lista_carti:
             print(get_str_carte(carte))
 
     except ValueError as ve:
@@ -139,21 +159,75 @@ def handle_modificare_gen(lista_carti):
     return lista_carti
 
 
+def handle_ordonare(lista_carti):
+    try:
+        lista_carti = ordonare(lista_carti)
+        handle_show_all(lista_carti)
+    except ValueError as ve:
+        print('Eroare: ', ve)
+
+    return lista_carti
+
+
+def handle_lista_noua(lista_versiuni, versiune_curenta, lista_carti):
+    return lista_noua(lista_versiuni, versiune_curenta, lista_carti)
+
+
+def handle_undo(lista_versiuni, versiune_curenta):
+    return undo(lista_versiuni, versiune_curenta)
+
+def handle_redo(lista_versiuni, versiune_curenta):
+    return redo(lista_versiuni, versiune_curenta)
+
+def handle_afisare_nr_titluri_distincte(lista_carti):
+    try:
+        lista = titluri_distincte(lista_carti)
+        for tuplu in lista:
+            print(f'Numarul de titluri distincte pentru genul {tuplu[0]} este {tuplu[1]}')
+    except ValueError as ve:
+        print('Eroare: ', ve)
+
+    return lista_carti
+
+
 def run_ui(lista_carti):
+
+    lista_versiuni = [lista_carti]
+    versiune_curenta = 0
 
     while True:
         show_menu()
         optiune = input('Dati optiune ')
         if optiune == '1':
-            carti = handle_crud(lista_carti)
+            lista_carti = handle_crud(lista_carti)
+            lista_versiuni, versiune_curenta = handle_lista_noua(lista_versiuni, versiune_curenta, lista_carti)
         elif optiune == '2':
-            handle_discount(lista_carti)
+            lista_carti = handle_discount(lista_carti)
+            lista_versiuni, versiune_curenta = handle_lista_noua(lista_versiuni, versiune_curenta, lista_carti)
         elif optiune == '3':
-            handle_modificare_gen(lista_carti)
+            lista_carti = handle_modificare_gen(lista_carti)
+            lista_versiuni, versiune_curenta = handle_lista_noua(lista_versiuni, versiune_curenta, lista_carti)
         elif optiune == '4':
             handle_pret_min(lista_carti)
+        elif optiune == '5':
+            lista_carti = handle_ordonare(lista_carti)
+            lista_versiuni, versiune_curenta = handle_lista_noua(lista_versiuni, versiune_curenta, lista_carti)
+        elif optiune == '6':
+            handle_afisare_nr_titluri_distincte(lista_carti)
         elif optiune == 'x':
             break
+        elif optiune == 'u':
+            if versiune_curenta < 1:
+                print('Nu se mai poate face undo')
+            else:
+                lista_carti, versiune_curenta = handle_undo(lista_versiuni, versiune_curenta)
+                if lista_carti == []:
+                    print(f'Lista este goala {lista_carti}')
+        elif optiune == 'r':
+            if versiune_curenta == len(lista_versiuni) - 1:
+                print('Nu se mai poate face redo')
+            else:
+                lista_carti, versiune_curenta = handle_redo(lista_versiuni, versiune_curenta)
         else:
             print('Optiune invalida')
     return lista_carti

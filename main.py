@@ -1,8 +1,11 @@
 from Logic.crud import create
+from Tests.test_afisare_titluri_distincte import test_titluri_distincte
 from Tests.test_crud import test_crud
 from Tests.test_determinare_pret_minim import test_determinare_pret_minim
 from Tests.test_modificare_gen import test_modificare_gen
+from Tests.test_ordonare import test_ordonare
 from Tests.test_reducere import test_reducere
+from Tests.test_undo_redo import test_undo_redo
 from UI.consola2 import run_ui2
 
 from UI.console import run_ui
@@ -18,10 +21,12 @@ def main():
    lista_carti = create(lista_carti, 5, 'titlu5', 'gen3', 23, 'none')
    lista_carti = create(lista_carti, 6, 'titlu6', 'gen2', 145, 'gold')
    lista_carti = create(lista_carti, 7, 'titlu7', 'gen4', 20, 'none')
-   run_ui2(lista_carti)
+   run_ui(lista_carti)
 
 
-
+test_undo_redo()
+test_titluri_distincte()
+test_ordonare()
 test_modificare_gen()
 test_determinare_pret_minim()
 test_reducere()
